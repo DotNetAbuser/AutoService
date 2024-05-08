@@ -77,6 +77,7 @@ public class RequestService(
             ModelId = request.ModelId,
             Year = request.Year,
             ServiceTypeId = request.ServiceTypeId,
+            StatusId = 1,
             Arrived = request.Arrived
         };
         await _requestRepository.CreateAsync(requestEntity);
@@ -106,5 +107,16 @@ public class RequestService(
 
         await _requestRepository.DeleteAsync(requestEntity);
         return Result<string>.Success("Заявка успешно удалена.");
+    }
+
+    public async Task<Result> ChangeStatusAsync(Guid requestId, ChangeStatusRequest request)
+    {
+        var requestEntity = await _requestRepository.GetByIdAsync(requestId);
+        if (requestEntity == null)
+            return Result<string>.Fail("Заявка с данным идентификатором не существует!");
+
+        requestEntity.StatusId = request.StatusId;
+        await _requestRepository.UpdateAsync(requestEntity);
+        return Result<string>.Success("Заявка успешно обновлена.");
     }
 }

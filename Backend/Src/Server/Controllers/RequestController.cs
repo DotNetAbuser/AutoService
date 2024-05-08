@@ -59,5 +59,11 @@ public class RequestController(
         return Ok(await _requestService.DeleteAsync(requestId));
     }
 
+    [HttpPut("{requestId:guid}/change-status")]
+    public async Task<IActionResult> ChangeStatusAsync(Guid requestId, ChangeStatusRequest request)
+    {
+        return Ok(await _requestService.ChangeStatusAsync(requestId, request));
+    }
+
    
 }

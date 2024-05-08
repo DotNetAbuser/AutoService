@@ -23,5 +23,9 @@ public class RequestConfiguration
             .HasOne(x => x.ServiceType)
             .WithMany(x => x.Requests)
             .HasForeignKey(x => x.ServiceTypeId);
+        builder
+            .HasOne(x => x.Status)
+            .WithMany(x => x.Requests)
+            .HasForeignKey(x => x.StatusId);
     }
 }

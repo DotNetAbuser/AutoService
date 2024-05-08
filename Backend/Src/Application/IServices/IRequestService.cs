@@ -14,4 +14,5 @@ public interface IRequestService
     Task<Result> CreateAsync(CreateRequestRequest request);
     Task<Result> UpdateAsync(Guid requestId, UpdateRequestRequest request);
     Task<Result> DeleteAsync(Guid requestId);
+    Task<Result> ChangeStatusAsync(Guid requestId, ChangeStatusRequest request);
 }
