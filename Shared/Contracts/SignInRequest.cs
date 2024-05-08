@@ -1,4 +1,4 @@
-﻿namespace Shared.Contracts.Requests;
+﻿namespace Shared.Contracts;
 
 public class SignInRequest
 {

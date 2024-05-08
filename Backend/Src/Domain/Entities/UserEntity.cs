@@ -3,7 +3,7 @@
 public class UserEntity
     : BaseEntity<Guid>
 {
-    public int RoleID { get; set; }
+    public int RoleId { get; set; }
 
     public string LastName { get; set; } = string.Empty;
     public string FirstName { get; set; } = string.Empty;
@@ -12,6 +12,8 @@ public class UserEntity
     public string Password { get; set; } = string.Empty;
 
     public string PhoneNumber { get; set; } = string.Empty;
+
+    public bool IsBanned { get; set; }
 
     public RoleEntity Role { get; set; } = null!;
     public virtual ICollection<SessionEntity> Sessions { get; set; } = [];

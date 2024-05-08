@@ -2,11 +2,6 @@
 
 public static class ServiceCollectionExtensions
 {
-    public static void AddHelpers(this IServiceCollection services) =>
-        services
-            .AddTransient<IPasswordHasher, PasswordHasher>();
-
-
     public static void AddRepositories(this IServiceCollection services) =>
         services
             .AddTransient<IBrandRepository, BrandRepository>()
@@ -25,6 +20,4 @@ public static class ServiceCollectionExtensions
             .AddTransient<IServiceTypeService, ServiceTypeService>()
             .AddTransient<ITokenService, TokenService>()
             .AddTransient<IUserService, UserService>();
-
-
 }

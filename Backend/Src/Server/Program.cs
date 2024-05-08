@@ -12,9 +12,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDatabase(configuration);
 
-builder.Services.AddHelpers();
 builder.Services.AddRepositories();
 builder.Services.AddServices();
+
+builder.Services.AddJwtAuthentication(configuration);
+builder.Services.AddSwagger();
 
 var app = builder.Build();
 

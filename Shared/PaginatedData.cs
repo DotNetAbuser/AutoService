@@ -1,4 +1,4 @@
-﻿namespace Shared.Contracts;
+﻿namespace Shared;
 
 public record PaginatedData<TItem>(
     IEnumerable<TItem> List,

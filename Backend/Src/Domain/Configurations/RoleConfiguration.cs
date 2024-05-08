@@ -14,5 +14,13 @@ public class RoleConfiguration
         builder
             .HasMany(x => x.Users)
             .WithOne(x => x.Role);
+
+        builder.HasData(Enum
+            .GetValues<Role>()
+            .Select(r => new RoleEntity
+            {
+                Id = (int)r,
+                Name = r.ToString(),
+            }));
     }
 }
