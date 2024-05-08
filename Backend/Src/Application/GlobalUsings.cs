@@ -1,5 +1,4 @@
-﻿namespace Application;
-
-public class GlobalUsings
-{
-}
+﻿global using Domain;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;

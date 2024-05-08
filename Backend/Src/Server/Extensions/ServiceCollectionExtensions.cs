@@ -1,6 +1,6 @@
 ﻿namespace Server.Extensions;
 
-public class ServiceCollectionExtensions
+internal static class ServiceCollectionExtensions
 {
     
 }

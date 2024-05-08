@@ -7,8 +7,14 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
     serverOptions.Configure(kestrelSection);
 }).UseKestrel();
 
-builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDatabase(configuration);
+
+builder.Services.AddHelpers();
+builder.Services.AddRepositories();
+builder.Services.AddServices();
 
 var app = builder.Build();
 
@@ -16,5 +22,10 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 #endif
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllers();
 
 app.Run();
