@@ -1,0 +1,185 @@
+﻿@page "/send-request"
+
+<div class="box form-box">
+    <header>Отправка заявки на посещение сервисного центра</header>
+    <EditForm Model="_model" OnValidSubmit="SubmitFormAsync">
+        <DataAnnotationsValidator/>
+        
+        <div class="field input">
+            <label for="brand_name">Марка авто</label>
+            <InputSelect @bind-Value="_model.BrandId" @bind-Value:after="LoadModelsAsync">
+                @if (_model.BrandId == 0)
+                { 
+                    <option selected value="0">Не выбрано</option>
+                }
+                @foreach (var brand in _brandsList)
+                {
+                    <option value="@brand.Id">@brand.Name </option>
+                }
+            </InputSelect>
+            <ValidationMessage For="() => _model.BrandId"/>
+        </div>
+        
+        <div class="field input">
+            <label for="model_name">Модель авто</label>
+            <InputSelect @bind-Value="_model.ModelId" name="model_name">
+                @if (_model.ModelId == 0)
+                { 
+                    <option selected value="0">Не выбрано</option>
+                }
+                @foreach (var model in _modelsList)
+                {
+                    <option value="@model.Id">@model.Name </option>
+                }
+            </InputSelect>
+            <ValidationMessage For="() => _model.ModelId"/>
+        </div>
+        
+        <div class="field input">
+            <label for="year">Год выпуска авто</label>
+            <InputNumber @bind-Value="_model.Year" type="number" name="year"/>
+            <ValidationMessage For="() => _model.Year"/>
+        </div>
+        
+        <div class="field input">
+            <label for="arrived">Планируемая дата посещения</label>
+            <InputDate @bind-Value="_model.Arrived" Type="InputDateType.DateTimeLocal" min="@DateTime.Now.AddHours(2).ToString("yyyy-MM-dd")" max="@DateTime.Now.AddDays(7).ToString("yyyy-MM-dd")" name="arrived"/>
+            <ValidationMessage For="() => _model.Arrived"/>
+        </div>
+
+        <div class="field input">
+            <label for="service-type_name">Тип услуги</label>
+            <InputSelect @bind-Value="_model.ServiceTypeId" name="service-type_name">
+                @if (_model.ServiceTypeId == 0)
+                { 
+                    <option selected value="0">Не выбрано</option>
+                }
+                @foreach (var serviceType in _serviceTypeList)
+                {
+                    <option value="@serviceType.Id">@serviceType.Name </option>
+                }
+            </InputSelect>
+            <ValidationMessage For="() => _model.ServiceTypeId"/>
+        </div>
+        
+        <div class="field submit">
+            <input type="submit" class="btn" value="Отправить заявку">
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        await LoadDataAsync();
+    }
+
+    [Inject] IToastService ToastService { get; set; } = default!;
+    [Inject] IBrandManager BrandManager { get; set; } = default!;
+    [Inject] IModelManager ModelManager { get; set; } = default!;
+    [Inject] IServiceTypeManager ServiceTypeManager { get; set; } = default!;
+    [Inject] IRequestManager RequestManager { get; set; } = default!;
+    [Inject] ITokenService TokenService { get; set; } = default!;
+    [Inject] NavigationManager NavigationManager { get; set; } = default!;
+
+    private bool _isBusy;
+
+    private CreateRequestRequest _model = new();
+    
+    private IEnumerable<BrandResponse> _brandsList = [];
+    private IEnumerable<ModelResponse> _modelsList = [];
+    private IEnumerable<ServiceTypeResponse> _serviceTypeList = [];
+
+
+    private async Task LoadBrandsAsync()
+    {
+        var result = await BrandManager.GetAllAsync();
+        if (!result.Succeeded)
+        {
+            foreach (var message in result.Messages)
+                ToastService.ShowInfo(message);
+            return;
+        }
+
+        _brandsList = result.Data;
+    }
+
+    private async Task LoadModelsAsync()
+    {
+        _modelsList = [];
+        _model.ModelId = 0;
+        var result = await ModelManager.GetAllByBrandIdAsync(_model.BrandId);
+        if (!result.Succeeded)
+        {
+            foreach (var message in result.Messages)
+                ToastService.ShowInfo(message);
+            return;
+        }
+
+        _modelsList = result.Data;
+    }
+    
+    private async Task LoadServicesTypesAsync()
+    {
+        var result = await ServiceTypeManager.GetAllAsync();
+        if (!result.Succeeded)
+        {
+            foreach (var message in result.Messages)
+                ToastService.ShowInfo(message);
+            return;
+        }
+
+        _serviceTypeList = result.Data;
+    }
+    
+    private async Task LoadDataAsync()
+    {
+        try
+        {
+            _isBusy = true;
+            
+            await LoadBrandsAsync();
+            await LoadServicesTypesAsync();
+        }
+        catch (Exception ex)
+        {
+            ToastService.ShowError(ex.Message);
+        }
+        finally
+        {
+            _isBusy = false;
+        }
+    }
+
+    private async Task SubmitFormAsync()
+    {
+        try
+        {
+            _isBusy = true;
+
+            var token = await TokenService.GetAuthTokenAsync();
+            var userId = Guid.Parse(TokenService.GetUserIdFromAuthToken(token));
+            _model.UserId = userId;
+            _model.Arrived = _model.Arrived.ToUniversalTime();
+            var result = await RequestManager.CreateAsync(_model);
+            if (!result.Succeeded)
+            {
+                foreach (var message in result.Messages)
+                    ToastService.ShowInfo(message);
+                return;
+            }
+            foreach (var message in result.Messages)
+                ToastService.ShowSuccess(message);
+            NavigationManager.NavigateTo("/requests", true, true);
+        }
+        catch (Exception ex)
+        {
+            ToastService.ShowError(ex.Message);
+        }
+        finally
+        {
+            _isBusy = false;
+        }
+    }
+}

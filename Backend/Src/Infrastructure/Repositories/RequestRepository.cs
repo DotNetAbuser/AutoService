@@ -23,12 +23,15 @@ public class RequestRepository(
         }
         
         var list = await query
+            .OrderByDescending(x => x.Created)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .Include(x => x.User)
             .Include(x => x.Brand)
             .Include(x => x.Model)
             .Include(x => x.ServiceType)
+            .Include(x => x.Status)
+            .OrderByDescending(x => x.Created)
             .ToListAsync();
         var totalCount = await query
             .CountAsync();
@@ -56,12 +59,14 @@ public class RequestRepository(
         
         var list = await query
             .Where(x => x.UserId == userId)
+            .OrderByDescending(x => x.Created)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .Include(x => x.User)
             .Include(x => x.Brand)
             .Include(x => x.Model)
             .Include(x => x.ServiceType)
+            .Include(x => x.Status)
             .ToListAsync();
         var totalCount = await query
             .Where(x => x.UserId == userId)
@@ -78,6 +83,7 @@ public class RequestRepository(
             .Include(x => x.Brand)
             .Include(x => x.Model)
             .Include(x => x.ServiceType)
+            .Include(x => x.Status)
             .SingleOrDefaultAsync(x => x.Id == requestId);
     }
 

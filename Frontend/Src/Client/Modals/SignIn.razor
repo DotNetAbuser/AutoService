@@ -1,0 +1,57 @@
+﻿@page "/sign-in"
+
+<div class="box form-box">
+    <header>Авторизация</header>
+    <EditForm Model="_model" OnValidSubmit="SubmitFormAsync">
+        <DataAnnotationsValidator/>
+        <div class="field input">
+            <label for="email">Эл. почта</label>
+            <InputText @bind-Value="_model.Email" type="email" name="email"/>
+            <ValidationMessage For="() => _model.Email"/>
+        </div>
+
+        <div class="field input">
+            <label for="password">Пароль</label>
+            <InputText @bind-Value="_model.Password" type="password" name="password"/>
+            <ValidationMessage For="() => _model.Password"/>
+        </div>
+
+        <div class="field submit">
+            <input type="submit" class="btn" value="Войти">
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    [Inject] ITokenManager TokenManager { get; set; } = null!;
+    [Inject] NavigationManager NavigationManager { get; set; } = null!;
+    [Inject] IToastService ToastService { get; set; } = null!;
+    
+    private bool _isBusy;
+    private SignInRequest _model = new SignInRequest();
+
+    private async Task SubmitFormAsync()
+    {
+        try
+        {
+            _isBusy = true;
+            
+            var result = await TokenManager.SignInAsync(_model);
+            if (!result.Succeeded)
+            {
+                foreach (var message in result.Messages)
+                    ToastService.ShowInfo(message);
+                return;
+            }
+            NavigationManager.NavigateTo("/", true,true);
+        }
+        catch (Exception ex)
+        {
+            ToastService.ShowError(ex.Message);
+        }
+        finally
+        {
+            _isBusy = false;
+        }
+    }
+}

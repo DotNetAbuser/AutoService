@@ -1,3 +1,17 @@
 ﻿global using System.Text.Json;
 global using System.Text.Json.Serialization;
 global using Shared.Result;
+global using Client.Infrastructure.Managers;
+global using Microsoft.Extensions.DependencyInjection;
+global using System.Net;
+global using System.Net.Http.Headers;
+global using Client.Infrastructure.Services;
+global using Shared.Contracts;
+global using Blazored.SessionStorage;
+global using System.Net.Http.Json;
+global using Client.Infrastructure.Constants;
+global using Client.Infrastructure.Extensions;
+global using Client.Infrastructure.Routes;
+global using Shared;
+global using System.IdentityModel.Tokens.Jwt;
+global using System.Security.Claims;

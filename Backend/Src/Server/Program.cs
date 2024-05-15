@@ -18,6 +18,8 @@ builder.Services.AddServices();
 builder.Services.AddJwtAuthentication(configuration);
 builder.Services.AddSwagger();
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 #if DEBUG
@@ -27,6 +29,12 @@ app.UseSwaggerUI();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCors(x => x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true) // allow any origin
+    .AllowCredentials()); // allow credentials
 
 app.MapControllers();
 

@@ -3,7 +3,7 @@
 [ApiController]
 [Route("api/request")]
 public class RequestController(
-    IRequestService _requestService)
+    IRequestService requestService)
     : ControllerBase
 {
     [HttpGet]
@@ -12,20 +12,20 @@ public class RequestController(
         int pageNumber, int pageSize,
         string? searchTerms)
     {
-        var response = await _requestService.GetPaginatedRequestsAsync(
+        var response = await requestService.GetPaginatedRequestsAsync(
             pageNumber, pageSize,
             searchTerms);
         return Ok(response);
     }
     
-    [HttpGet("{userId:guid}/user")]
+    [HttpGet("user/{userId:guid}")]
     [Authorize]
     public async Task<IActionResult> GetPaginatedRequestsByUserIdAsync(
         Guid userId,
         int pageNumber, int pageSize,
         string? searchTerms)
     {
-        var response = await _requestService.GetPaginatedRequestsByUserIdAsync(
+        var response = await requestService.GetPaginatedRequestsByUserIdAsync(
             userId,
             pageNumber, pageSize,
             searchTerms);
@@ -36,7 +36,7 @@ public class RequestController(
     [Authorize]
     public async Task<IActionResult> GetByIdAsync(Guid requestId)
     {
-        var response = await _requestService.GetByIdAsync(requestId);
+        var response = await requestService.GetByIdAsync(requestId);
         return Ok(response);
     }
 
@@ -44,25 +44,25 @@ public class RequestController(
     [Authorize]
     public async Task<IActionResult> CreateAsync(CreateRequestRequest request)
     {
-        return Ok(await _requestService.CreateAsync(request));
+        return Ok(await requestService.CreateAsync(request));
     }
 
     [HttpPut("{requestId:guid}")]
     public async Task<IActionResult> UpdateAsync(Guid requestId, UpdateRequestRequest request)
     {
-        return Ok(await _requestService.UpdateAsync(requestId, request));
+        return Ok(await requestService.UpdateAsync(requestId, request));
     }
 
     [HttpDelete("{requestId:guid}")]
     public async Task<IActionResult> DeleteAsync(Guid requestId)
     {
-        return Ok(await _requestService.DeleteAsync(requestId));
+        return Ok(await requestService.DeleteAsync(requestId));
     }
 
     [HttpPut("{requestId:guid}/change-status")]
     public async Task<IActionResult> ChangeStatusAsync(Guid requestId, ChangeStatusRequest request)
     {
-        return Ok(await _requestService.ChangeStatusAsync(requestId, request));
+        return Ok(await requestService.ChangeStatusAsync(requestId, request));
     }
 
    

@@ -1,0 +1,72 @@
+﻿<div class="container">
+    <a href="/" class="logo">
+        <img src="/assets/images/logo.png" width="128" height="63" alt="AutoService" />
+    </a>
+
+    <nav class="@_navBarState">
+        <ul class="navbar-list">
+            <li>
+                <a href="/" class="navbar-link">Главная</a>
+            </li>
+            <AuthorizeView>
+                <Authorized>
+                    <li>
+                        <a href="requests" class="navbar-link">Заявки</a>
+                    </li>
+                    <li @onclick="SignOut">
+                        <a class="navbar-link">Выйти</a>
+                    </li>
+                </Authorized>
+                <NotAuthorized>
+                    <li @onclick="@ShowSignInModal">
+                        <a class="navbar-link">Войти</a>
+                    </li>
+                    <li @onclick="@ShowSignUpModal">
+                        <a class="navbar-link">Зарегистрироваться</a>
+                    </li>
+                </NotAuthorized>
+            </AuthorizeView>
+        </ul>
+    </nav>
+    <button class="@_navToggleBtnState" @onclick="ChangeNavBarState">
+        <span class="nav-toggle-icon icon-1"></span>
+        <span class="nav-toggle-icon icon-2"></span>
+        <span class="nav-toggle-icon icon-3"></span>
+    </button>
+</div>
+
+@code{
+    [CascadingParameter] IModalService ModalService { get; set; } = default!;
+    [Inject] CustomAuthenticationStateProvider CustomAuthStateProvider { get; set; } = default!;
+    
+    private const string NavBarClass = "navbar";
+    private const string NavBarActiveClass = "navbar active";
+    
+    private string _navBarState = NavBarClass;
+    
+    private const string NavToggleBtnClass = "nav-toggle-btn";
+    private const string NavToggleBtnActiveClass = "nav-toggle-btn active";
+    
+    private string _navToggleBtnState = NavToggleBtnClass;
+
+    private void ChangeNavBarState()
+    {
+        _navBarState = _navBarState == NavBarClass 
+            ? NavBarActiveClass
+            : NavBarClass;
+
+        _navToggleBtnState = _navToggleBtnState == NavToggleBtnClass
+            ? NavToggleBtnActiveClass
+            : NavToggleBtnClass;
+    }
+
+    private void ShowSignInModal() =>
+        ModalService.Show<SignIn>();
+    
+    private void ShowSignUpModal() =>
+        ModalService.Show<SignUp>();
+
+    private async Task SignOut() =>
+        await CustomAuthStateProvider.MarkUserAsLoggedOut();
+    
+}

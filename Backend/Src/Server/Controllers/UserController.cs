@@ -3,7 +3,7 @@
 [ApiController]
 [Route("api/identity/user")]
 public class UserController(
-    IUserService _userService)
+    IUserService userService)
     : ControllerBase
 {
     [HttpGet]
@@ -11,7 +11,7 @@ public class UserController(
     public async Task<IActionResult> GetPaginatedUsersAsync(
         int pageNumber, int pageSize, string? searchTerms)
     {
-        var response = await _userService.GetPaginatedUsersAsync(
+        var response = await userService.GetPaginatedUsersAsync(
             pageNumber, pageSize, searchTerms);
         return Ok(response);
     }
@@ -20,14 +20,14 @@ public class UserController(
     [Authorize(Roles = "Operator, Admin")]
     public async Task<IActionResult> GetByIdAsync(Guid userId)
     {
-        var response = await _userService.GetByIdAsync(userId);
+        var response = await userService.GetByIdAsync(userId);
         return Ok(response);
     }
     
     [HttpPost]
     public async Task<IActionResult> SignUpAsync(SignUpRequest request)
     {
-        return Ok(await _userService.CreateAsync(request));
+        return Ok(await userService.CreateAsync(request));
     }
 
     // [HttpGet("{userId:guid}/role")]

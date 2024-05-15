@@ -1,0 +1,122 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ilyao\\Desktop\\Projects\\AutoService\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7A58889A-DBE9-40EF-B5BF-1B81BA6B6D62}|Frontend\\Src\\Client\\Client.csproj|c:\\users\\ilyao\\desktop\\projects\\autoservice\\frontend\\src\\client\\components\\layout\\headerbar.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7A58889A-DBE9-40EF-B5BF-1B81BA6B6D62}|Frontend\\Src\\Client\\Client.csproj|solutionrelative:frontend\\src\\client\\components\\layout\\headerbar.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6BF9353D-5A04-42A0-8273-AAA3AAEF0658}|Frontend\\Src\\Server\\Server.csproj|c:\\users\\ilyao\\desktop\\projects\\autoservice\\frontend\\src\\server\\components\\routes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6BF9353D-5A04-42A0-8273-AAA3AAEF0658}|Frontend\\Src\\Server\\Server.csproj|solutionrelative:frontend\\src\\server\\components\\routes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6BF9353D-5A04-42A0-8273-AAA3AAEF0658}|Frontend\\Src\\Server\\Server.csproj|c:\\users\\ilyao\\desktop\\projects\\autoservice\\frontend\\src\\server\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6BF9353D-5A04-42A0-8273-AAA3AAEF0658}|Frontend\\Src\\Server\\Server.csproj|solutionrelative:frontend\\src\\server\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6BF9353D-5A04-42A0-8273-AAA3AAEF0658}|Frontend\\Src\\Server\\Server.csproj|c:\\users\\ilyao\\desktop\\projects\\autoservice\\frontend\\src\\server\\globalusings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6BF9353D-5A04-42A0-8273-AAA3AAEF0658}|Frontend\\Src\\Server\\Server.csproj|solutionrelative:frontend\\src\\server\\globalusings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A58889A-DBE9-40EF-B5BF-1B81BA6B6D62}|Frontend\\Src\\Client\\Client.csproj|c:\\users\\ilyao\\desktop\\projects\\autoservice\\frontend\\src\\client\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7A58889A-DBE9-40EF-B5BF-1B81BA6B6D62}|Frontend\\Src\\Client\\Client.csproj|solutionrelative:frontend\\src\\client\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A58889A-DBE9-40EF-B5BF-1B81BA6B6D62}|Frontend\\Src\\Client\\Client.csproj|c:\\users\\ilyao\\desktop\\projects\\autoservice\\frontend\\src\\client\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7A58889A-DBE9-40EF-B5BF-1B81BA6B6D62}|Frontend\\Src\\Client\\Client.csproj|solutionrelative:frontend\\src\\client\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GlobalUsings.cs",
+              "DocumentMoniker": "C:\\Users\\ilyao\\Desktop\\Projects\\AutoService\\Frontend\\Src\\Server\\GlobalUsings.cs",
+              "RelativeDocumentMoniker": "Frontend\\Src\\Server\\GlobalUsings.cs",
+              "ToolTip": "C:\\Users\\ilyao\\Desktop\\Projects\\AutoService\\Frontend\\Src\\Server\\GlobalUsings.cs",
+              "RelativeToolTip": "Frontend\\Src\\Server\\GlobalUsings.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-13T17:37:38.447Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_Imports.razor",
+              "DocumentMoniker": "C:\\Users\\ilyao\\Desktop\\Projects\\AutoService\\Frontend\\Src\\Server\\Components\\_Imports.razor",
+              "RelativeDocumentMoniker": "Frontend\\Src\\Server\\Components\\_Imports.razor",
+              "ToolTip": "C:\\Users\\ilyao\\Desktop\\Projects\\AutoService\\Frontend\\Src\\Server\\Components\\_Imports.razor",
+              "RelativeToolTip": "Frontend\\Src\\Server\\Components\\_Imports.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-13T17:37:18.097Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Routes.razor",
+              "DocumentMoniker": "C:\\Users\\ilyao\\Desktop\\Projects\\AutoService\\Frontend\\Src\\Server\\Components\\Routes.razor",
+              "RelativeDocumentMoniker": "Frontend\\Src\\Server\\Components\\Routes.razor",
+              "ToolTip": "C:\\Users\\ilyao\\Desktop\\Projects\\AutoService\\Frontend\\Src\\Server\\Components\\Routes.razor",
+              "RelativeToolTip": "Frontend\\Src\\Server\\Components\\Routes.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-13T17:36:20.395Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainLayout.razor",
+              "DocumentMoniker": "C:\\Users\\ilyao\\Desktop\\Projects\\AutoService\\Frontend\\Src\\Client\\Components\\Layout\\MainLayout.razor",
+              "RelativeDocumentMoniker": "Frontend\\Src\\Client\\Components\\Layout\\MainLayout.razor",
+              "ToolTip": "C:\\Users\\ilyao\\Desktop\\Projects\\AutoService\\Frontend\\Src\\Client\\Components\\Layout\\MainLayout.razor",
+              "RelativeToolTip": "Frontend\\Src\\Client\\Components\\Layout\\MainLayout.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-13T17:31:00.561Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HeaderBar.razor",
+              "DocumentMoniker": "C:\\Users\\ilyao\\Desktop\\Projects\\AutoService\\Frontend\\Src\\Client\\Components\\Layout\\HeaderBar.razor",
+              "RelativeDocumentMoniker": "Frontend\\Src\\Client\\Components\\Layout\\HeaderBar.razor",
+              "ToolTip": "C:\\Users\\ilyao\\Desktop\\Projects\\AutoService\\Frontend\\Src\\Client\\Components\\Layout\\HeaderBar.razor",
+              "RelativeToolTip": "Frontend\\Src\\Client\\Components\\Layout\\HeaderBar.razor",
+              "ViewState": "AQIAABUAAAAAAAAAAIAwwDUAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-13T17:30:47.033Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_Imports.razor",
+              "DocumentMoniker": "C:\\Users\\ilyao\\Desktop\\Projects\\AutoService\\Frontend\\Src\\Client\\_Imports.razor",
+              "RelativeDocumentMoniker": "Frontend\\Src\\Client\\_Imports.razor",
+              "ToolTip": "C:\\Users\\ilyao\\Desktop\\Projects\\AutoService\\Frontend\\Src\\Client\\_Imports.razor",
+              "RelativeToolTip": "Frontend\\Src\\Client\\_Imports.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-13T17:30:25.818Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

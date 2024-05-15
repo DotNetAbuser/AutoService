@@ -21,6 +21,8 @@ public class RequestService(
                 Year: requestEntity.Year,
                 ServiceTypeName: requestEntity.ServiceType.Name,
                 Price: requestEntity.ServiceType.Price,
+                StatusName: requestEntity.Status.Name,
+                Arrived: requestEntity.Arrived,
                 Created: requestEntity.Created)).ToList();
         return Result<PaginatedData<RequestResponse>>.Success(new PaginatedData<RequestResponse>(
             List: requestsResponse, TotalCount: totalCount), "Список заявок успешно получен!");
@@ -43,6 +45,8 @@ public class RequestService(
                 Year: requestEntity.Year,
                 ServiceTypeName: requestEntity.ServiceType.Name,
                 Price: requestEntity.ServiceType.Price,
+                StatusName: requestEntity.Status.Name,
+                Arrived: requestEntity.Arrived,
                 Created: requestEntity.Created)).ToList();
         return Result<PaginatedData<RequestResponse>>.Success(new PaginatedData<RequestResponse>(
             List: requestsResponse, TotalCount: totalCount), "Список заявок успешно получен!");
@@ -65,6 +69,8 @@ public class RequestService(
             Year: requestEntity.Year,
             ServiceTypeName: requestEntity.ServiceType.Name,
             Price: requestEntity.ServiceType.Price,
+            StatusName: requestEntity.Status.Name,
+            Arrived: requestEntity.Arrived,
             Created: requestEntity.Created);
         return Result<RequestResponse>.Success(requestResponse, "Заявка успешно получена.");
     }

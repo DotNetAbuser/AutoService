@@ -6,17 +6,17 @@ public class ModelController(
     IModelService _modelService)
     : ControllerBase
 {
-    [HttpGet("{modelId:int}")]
-    public async Task<IActionResult> GetByIdAsync(int modelId)
-    {
-        var response = await _modelService.GetByIdAsync(modelId);
-        return Ok(response);
-    }
-    
     [HttpGet("brand/{brandId:int}")]
     public async Task<IActionResult> GetAllModelsByBrandIdAsync(int brandId)
     {
         var response = await _modelService.GetAllByBrandIdAsync(brandId);
+        return Ok(response);
+    }
+    
+    [HttpGet("{modelId:int}")]
+    public async Task<IActionResult> GetByIdAsync(int modelId)
+    {
+        var response = await _modelService.GetByIdAsync(modelId);
         return Ok(response);
     }
 

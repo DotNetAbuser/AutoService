@@ -1,9 +1,159 @@
 ﻿@page "/"
-@page "/home"
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Главная</PageTitle>
 
-<h1>Hello, world!</h1>
+<section class="hero has-bg-image" aria-label="home"
+         style="background-image: url('/assets/images/hero-bg.jpg')">
+    <div class="container">
+        <div class="hero-content">
+            <p class="section-subtitle :dark">Наши мастера опытные и ответсвенные!</p>
+            <h1 class="h1 section-title">Авто Сервис & Услуги Ремонта</h1>
+            <p class="section-text">
+                Непревзойденное качество обслуживание при ремонте вашего авто!
+            </p>
+            <a @onclick="ShowSendRequestModal" class="btn">
+                <span class="span">Подать заявку</span>
+                <span class="material-symbols-rounded">arrow_forward</span>
+            </a>
+        </div>
 
-Welcome to your new app.
+        <figure class="hero-banner" style="--width: 1228; --height: 789;">
+            <img src="/assets/images/hero-banner.png" width="1228" height="789" alt="" class="move-anim">
+        </figure>
+    </div>
+</section>
+
+<section class="section service has-bg-image" aria-labelledby=""
+         style="background-image: url('/assets/images/service-bg.jpg')">
+    <div class="container">
+        <p class="section-subtitle :light">Наши услуги</p>
+        <h2 class="h2 section-title">Мы проведем отличное сервисное обслуживание вашего авто!</h2>
+        <ul class="service-list">
+            <li>
+                <div class="service-card">
+                    <figure class="card-icon">
+                        <img src="/assets/images/services-1.png" width="110" height="110" loading="lazy" alt="">
+                    </figure>
+
+                    <h3 class="h3 card-title">Ремонт двигателя</h3>
+                    <p class="card-text">Ремонт в течение пары часов и ваш авто снова в деле!</p>
+
+                </div>
+            </li>
+            <li>
+                <div class="service-card">
+                    <figure class="card-icon">
+                        <img src="/assets/images/services-2.png" width="110" height="110" loading="lazy" alt="">
+                    </figure>
+
+                    <h3 class="h3 card-title">Ремонт тормозов</h3>
+                    <p class="card-text">Без тормозов на дороге никак!</p>
+
+                </div>
+            </li>
+            <li>
+                <div class="service-card">
+                    <figure class="card-icon">
+                        <img src="/assets/images/services-3.png" width="110" height="110" loading="lazy" alt="">
+                    </figure>
+
+                    <h3 class="h3 card-title">Замена колеса</h3>
+                    <p class="card-text">Смена колеса быстро и качественно!</p>
+
+                </div>
+            </li>
+            <li>
+                <div class="service-card">
+                    <figure class="card-icon">
+                        <img src="/assets/images/services-4.png" width="110" height="110" loading="lazy" alt="">
+                    </figure>
+
+                    <h3 class="h3 card-title">Замена аккумулятора</h3>
+                    <p class="card-text">Зарядим, отремонтируем либо заменим аккумулятор вашему авто!</p>
+
+                </div>
+            </li>
+
+            <li class="service-banner">
+                <img src="/assets/images/services-5.png" width="646" height="380" loading="lazy" alt="" class="move-anim" />
+            </li>
+
+            <li class="service-card">
+                <figure class="card-icon">
+                    <img src="/assets/images/services-6.png" width="110" height="110" loading="lazy" alt="" />
+                </figure>
+                <h3 class="h3 card-title">Ремонт рулевого колеса</h3>
+                <p class="card-text">При данной неисправности водить авто нельзя!</p>
+
+            </li>
+        </ul>
+    </div>
+</section>
+
+<section class="section about has-before" aria-labelledby="about-label">
+    <div class="container">
+        <figure class="about-banner">
+            <img class="w-100" src="/assets/images/about-banner.png" width="540" height="540" loading="lazy" alt="" />
+        </figure>
+        <div class="about-content">
+            <p class="section-subtitle :dark">О нас</p>
+
+            <h2 class="h2 section-title">Мы соблюдаем стандарты обслуживания высшего класса!</h2>
+            <p class="section-text">
+                Мы работаем на рынке с 2010 года в России и Беларуси!
+            </p>
+
+            <p class="section-text">
+                Множество положительных отзывов!
+            </p>
+            <ul class="about-list">
+                <li class="about-item">
+                    <p>
+                        <strong class="strong">8 тыс+</strong> довольных клиентов
+                    </p>
+                </li>
+                <li class="about-item">
+                    <p>
+                        <strong class="strong">3 тыс+</strong> положительных отзывов
+                    </p>
+                </li>
+                <li class="about-item">
+                    <p>
+                        <strong class="strong">10 лет+</strong> на рынке
+                    </p>
+                </li>
+                <li class="about-item">
+                    <p>
+                        <strong class="strong">1000 руб+</strong> средний чек
+                    </p>
+                </li>
+                
+
+            </ul>
+        </div>
+    </div>
+</section>
+
+@code{
+    [CascadingParameter] public IModalService ModalService { get; set; } = default!;
+    [Inject] CustomAuthenticationStateProvider CustomAuthStateProvider { get; set; } = default!;
+    [Inject] IToastService ToastService { get; set; } = default!;
+
+
+    private async Task ShowSendRequestModal()
+    {
+        var isAuthenticate = await CustomAuthStateProvider.GetAuthenticationStateAsync();
+        if (!isAuthenticate.User.Identity.IsAuthenticated)
+        {
+            ModalService.Show<SignIn>();
+            ToastService.ShowInfo("Для подачи заявки необходимо пройти авторизацию!");
+        }
+        else
+        {
+            ModalService.Show<SendRequest>();
+        }
+    }
+
+}
+
 

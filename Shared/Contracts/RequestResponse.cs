@@ -11,4 +11,6 @@ public record RequestResponse(
     int Year,
     string ServiceTypeName,
     decimal Price,
+    DateTime Arrived,
+    string StatusName,
     DateTime Created);

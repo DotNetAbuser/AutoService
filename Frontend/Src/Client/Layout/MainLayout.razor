@@ -1,0 +1,35 @@
+﻿@inherits LayoutComponentBase
+
+<CascadingAuthenticationState>
+    <CascadingBlazoredModal OverlayCustomClass="custom-modal-overlay" DisableBackgroundCancel="true">
+        <header class="header">
+            <HeaderBar />
+        </header>
+                
+        <main>
+            <article>
+                @Body
+            </article>
+        </main>
+            
+        <footer class="footer">
+            <FooterBar />
+        </footer>
+        <BlazoredToasts Position="ToastPosition.BottomRight"
+                        Timeout="10"
+                        IconType="IconType.FontAwesome"
+                        SuccessClass="success-toast-override"
+                        SuccessIcon="fa fa-thumbs-up"
+                        ErrorIcon="fa fa-bug" 
+                        InfoClass="f fa-info-circle"
+                        InfoIcon="fa fa-info"
+                        WarningIcon="fa fa-warning"/>
+    </CascadingBlazoredModal>
+</CascadingAuthenticationState>
+
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>

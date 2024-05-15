@@ -1,0 +1,143 @@
+﻿@page "/requests"
+
+@attribute [Authorize]
+
+<PageTitle>Мои заявки</PageTitle>
+
+<section class="requests"> 
+    <div class="container">
+        <h1 class="h1 section-subtitle">Заявки на ремонт</h1>
+        <hr/>
+        <div class="card-container">
+            @foreach (var request in _requestsList)
+            {
+                <div class="task">
+                    <div class="tags">
+                        <span class="tag">Заявка</span>
+                    </div>
+                    <p>Марка авто: @request.BrandName </p>
+                    <p>Модель авто: @request.ModelName</p>
+                    <p>Год выпуска: @request.Year</p>
+                    <p>Тип услуги: @request.ServiceTypeName</p>
+                    <p>Цена: @request.Price</p>
+                    <p>Статус заявки: @request.StatusName</p>
+                    <p>Дата прибытия: @request.Arrived.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</p>
+                    <div class="stats">
+                        <div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
+                                    <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path stroke-linecap="round" stroke-width="2" d="M12 8V12L15 15"></path> 
+                                        <circle stroke-width="2" r="9" cy="12" cx="12"></circle>
+                                    </g>
+                                </svg>@request.Created.ToLocalTime().ToString("dd.MM.yyyy HH:mm")
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        @if (isCanGetNextData)
+        {
+            <div class="btn-container">
+                <button @onclick="LoadNextDataAsync" class="btn btn-show-more">Показать ещё</button>
+            </div>
+        }
+    </div>
+</section>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        await LoadDataAsync();
+        
+    }
+
+    [Inject] IToastService ToastService { get; set; } = default!;
+    [Inject] IRequestManager RequestManager { get; set; } = default!;
+    [Inject] ITokenService TokenService { get; set; } = default!;
+    
+    private bool _isBusy;
+
+    private int pageNumber = 1;
+    private int pageSize = 6;
+    private string searchTerms = string.Empty;
+
+    private bool isCanGetNextData;
+    
+    private List<RequestResponse> _requestsList = [];
+    private int _totalCount;
+
+    private async Task LoadDataAsync()
+    {
+        try
+        {
+            _isBusy = true;
+            
+            pageNumber = 1;
+            _requestsList.Clear();;
+            
+            var token = await TokenService.GetAuthTokenAsync();
+            var userId = Guid.Parse(TokenService.GetUserIdFromAuthToken(token));
+            var result = await RequestManager.GetPaginatedRequestsByUserIdAsync(
+                userId, pageNumber, pageSize, searchTerms);
+            if (!result.Succeeded)
+            {
+                foreach (var message in result.Messages)
+                    ToastService.ShowInfo(message);
+                return;
+            }
+            foreach (var request in result.Data.List)
+                _requestsList.Add(request);
+            _totalCount = result.Data.TotalCount;
+            isCanGetNextData = _requestsList.Count < _totalCount;
+        }
+        catch (Exception ex)
+        {
+            ToastService.ShowError(ex.Message);
+        }
+        finally
+        {
+            _isBusy = false;
+        }
+    }
+
+    private async Task LoadNextDataAsync()
+    {
+        try
+        {
+            _isBusy = true;
+            
+            pageNumber += 1;
+            
+            var token = await TokenService.GetAuthTokenAsync();
+            var userId = Guid.Parse(TokenService.GetUserIdFromAuthToken(token));
+            var result = await RequestManager.GetPaginatedRequestsByUserIdAsync(
+                userId, pageNumber, pageSize, searchTerms);
+            if (!result.Succeeded)
+            {
+                foreach (var message in result.Messages)
+                    ToastService.ShowInfo(message);
+                return;
+            }
+            foreach (var request in result.Data.List)
+                _requestsList.Add(request);
+            _totalCount = result.Data.TotalCount;
+            isCanGetNextData = _requestsList.Count < _totalCount;
+        }
+        catch (Exception ex)
+        {
+            ToastService.ShowError(ex.Message);
+        }
+        finally
+        {
+            _isBusy = false;
+        }
+    }
+
+}
