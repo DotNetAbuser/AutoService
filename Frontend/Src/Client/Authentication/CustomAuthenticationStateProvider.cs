@@ -31,5 +31,4 @@ public class CustomAuthenticationStateProvider(
         var state = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(claims, "jwt")));
         return state;
     }
-        
 }
