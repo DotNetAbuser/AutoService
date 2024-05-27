@@ -4,6 +4,7 @@
     "Frontend": {
       "commandName": "Project",
       "launchBrowser": true,
+      "applicationUrl": "http://localhost:7002",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
