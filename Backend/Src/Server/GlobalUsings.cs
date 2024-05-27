@@ -9,3 +9,4 @@ global using Server.Extensions;
 global using Application.IServices;
 global using Shared.Contracts;
 global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.HttpOverrides;

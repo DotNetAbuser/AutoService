@@ -20,11 +20,18 @@ builder.Services.AddSwagger();
 
 builder.Services.AddCors();
 
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+});
+
 var app = builder.Build();
 
 #if DEBUG
-app.UseSwagger();
-app.UseSwaggerUI();
+app.AddSwagger();
+#else
+app.UseForwardedHeaders();
 #endif
 
 app.UseAuthentication();
